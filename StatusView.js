@@ -6,7 +6,7 @@ export default class StatusView extends Component {
 
   render() {
 
-    console.log('single viewwwwww', this.props.navigation.state.params)
+    // console.log('single viewwwwww', this.props.navigation.state.params)
     const { train } = this.props.navigation.state.params;
     const { status } = this.props.navigation.state.params;
     const { img } = this.props.navigation.state.params;

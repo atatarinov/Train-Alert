@@ -78,24 +78,50 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
-      error: false,
-      posts: [],
+      subwayLines: {}
     };
 
   }
 
   componentWillMount () {
     console.log('component mounted');
+
     fetch('http://web.mta.info/status/serviceStatus.txt')
     .then(response => response.text())
-    .then((response) => {
-        parseString(response, function (err, result) {
-            console.log(response)
-        });
-    }).catch((err) => {
+    .then(response => {
+      parseString(response, function (err, result) {
+        if (err) throw err;
+        // result = JSON.stringify(result);
+        // result = JSON.parse(result);
+        console.log(result.service.subway[0].line[0].text);
+    });
+    })
+
+
+
+
+
+
+    // fetch('http://web.mta.info/status/serviceStatus.txt')
+    // .then(response => response.text())
+    // .then((response) => {
+    //     parseString(response, (err, result) => {
+    //       if (err) throw err;
+    //       result = JSON.stringify(result)
+    //       console.log(result)
+
+    //     });
+    // })
+    .catch((err) => {
         console.log('fetch', err)
     })
+
+
+    // mta.status('subway', function (err, status) {
+    //   if (err) throw err;
+    //   // let result = JSON.stringify(status);
+    //   console.log(status);
+    // })
 
 
     // return fetch('http://web.mta.info/status/serviceStatus.txt')
@@ -106,10 +132,7 @@ export default class Home extends Component {
   }
 
 
-    // mta.status('subway', function (err, status) {
-    //   if (err) throw err;
-    //   let result = JSON.stringify(status);
-    //   // console.log(status);
+
 
     //   status.forEach(item => {
     //     if (item.text) {
@@ -122,7 +145,7 @@ export default class Home extends Component {
 
 
   render() {
-
+    // console.log('STATEEEEE', this.state.subwayLines);
     const { navigate } = this.props.navigation;
 
     return (

@@ -63,15 +63,15 @@ let textArr = [];
 // Get status for the subway system
 mta.status('subway', function (err, status) {
   if (err) throw err;
-  let result = JSON.stringify(status);
-  // console.log(status);
+  // let result = JSON.stringify(status);
+  console.log(status);
 
-  status.forEach(item => {
-    if (item.text) {
-      textArr.push(item.text);
-    }
-  })
-  console.log(textArr);
+  // status.forEach(item => {
+  //   if (item.text) {
+  //     textArr.push(item.text);
+  //   }
+  // })
+  // console.log(textArr);
 });
 
 
