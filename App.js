@@ -7,12 +7,11 @@ import Home from './Home';
 import StatusView from './StatusView';
 // import FontAwesome, { Icons } from 'react-native-fontawesome';
 
-
-
 const Views = StackNavigator({
   Home: { screen: Home },
   StatusView: { screen: StatusView }
 });
+
 
 export default class App extends Component {
 
