@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Header, List, ListItem } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+import HTMLView from 'react-native-htmlview';
 
 // const mta = require('mta')();
 const parseString = require('react-native-xml2js').parseString;
@@ -54,6 +55,34 @@ export default class Home extends Component {
     headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 25 }
   };
 
+  statusStyle(status) {
+    if (status === 'GOOD SERVICE') {
+      return {
+        color: 'green'
+      }
+    } else if (status === 'PLANNED WORK' || 'SERVICE CHANGED') {
+      return {
+        color: '#FF8C00'
+      }
+    } else if (status === 'DELAYED') {
+      return {
+        color: 'red'
+      }
+    }
+  }
+
+  disablePress(status) {
+    if (status === 'GOOD SERVICE') return true;
+    return false;
+  }
+
+  spreadTitle(title) {
+    if (title === 'SIR') return title;
+    if (title === 'NQR') title = title + 'W';
+    return title.split('').join(' ');
+  }
+
+
   render() {
 
     const { navigate } = this.props.navigation;
@@ -74,11 +103,18 @@ export default class Home extends Component {
               <ListItem
                 style={{ backgroundColor: 'red' }}
                 key={i}
-                leftIcon={{name: 'train'}}
-                title={<Text>{item.name}</Text>}
+                leftIcon={{ name: 'train' }}
+                title={this.spreadTitle(item.name[0])}
                 rightTitle={item.status[0]}
+                rightTitleStyle={this.statusStyle(item.status[0])}
+                disabled={this.disablePress(item.status[0])}
                 onPress={(i) =>
-                  navigate('StatusView', { train: item.name, status: item.text, img: item.img })
+                  navigate('StatusView', {
+                    train: item.name,
+                    status: item.status,
+                    text: item.text,
+                    // img: item.img
+                  })
                 }
               />
             ))

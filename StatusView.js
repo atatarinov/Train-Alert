@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Button } from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 
 export default class StatusView extends Component {
 
   static navigationOptions = {
-
+    title: 'Service Status'
   };
 
   filterOutAd(text) {
     if (text.includes('[ad]')) {
       let startIndex = text.indexOf('[ad]');
-      text = text.slice(0, startIndex -1);
+      text = text.slice(0, startIndex - 1);
     }
     return text;
   }
@@ -19,7 +20,7 @@ export default class StatusView extends Component {
   filterOutShowShuttleBusStops(text) {
     if (text.includes('Show Shuttle Bus Stops')) {
       let startIndex = text.indexOf('Show Shuttle Bus Stops');
-      text = text.slice(0, startIndex -1);
+      text = text.slice(0, startIndex - 1);
     }
     return text;
   }
@@ -27,7 +28,7 @@ export default class StatusView extends Component {
   filterOutTravelAlternatives(text) {
     if (text.includes('Travel Alternatives')) {
       let startIndex = text.indexOf('Travel Alternatives');
-      text = text.slice(0, startIndex -1);
+      text = text.slice(0, startIndex - 1);
     }
     return text;
   }
@@ -35,7 +36,7 @@ export default class StatusView extends Component {
   filterOutServiceMap(text) {
     if (text.includes('Weekend service map')) {
       let startIndex = text.indexOf('Weekend service map');
-      text = text.slice(0, startIndex -1);
+      text = text.slice(0, startIndex - 1);
     }
     return text;
   }
@@ -43,7 +44,7 @@ export default class StatusView extends Component {
   filterOutTravelNotes(text) {
     if (text.includes('Alternate travel notes')) {
       let startIndex = text.indexOf('Alternate travel notes');
-      text = text.slice(0, startIndex -1);
+      text = text.slice(0, startIndex - 1);
     }
     return text;
   }
@@ -63,8 +64,8 @@ export default class StatusView extends Component {
   }
 
   filterText(text) {
-    let result = text.replace(/<[^>]+>/g," ") // filter out tags
-    result = result.replace(/\r?\n|\r/g," ") // filter out new lines
+    let result = text.replace(/<[^>]+>/g, " ") // filter out tags
+    result = result.replace(/\r?\n|\r/g, " ") // filter out new lines
     result = result.replace(/\s\s+/g, ' '); // filter out more than 2 spaces
     result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ').trim();
 
@@ -75,28 +76,66 @@ export default class StatusView extends Component {
     console.log('Pressed!!!!')
   }
 
+  statusStyle(status) {
+    if (status === 'GOOD SERVICE') {
+      return {
+        color: 'green'
+      }
+    } else if (status === 'PLANNED WORK' || 'SERVICE CHANGED') {
+      return {
+        color: '#FF8C00'
+      }
+    } else if (status === 'DELAYED') {
+      return {
+        color: 'red'
+      }
+    }
+  }
+
+  spreadTitle(title) {
+    if (title === 'SIR') return title;
+    if (title === 'NQR') title = title + 'W';
+    return title.split('').join(' ');
+  }
+
   render() {
 
     const { train } = this.props.navigation.state.params;
-    const status  = this.props.navigation.state.params.status[0];
-    const { img } = this.props.navigation.state.params;
+    const status = this.props.navigation.state.params.status[0];
+    const text = this.props.navigation.state.params.text[0];
+    // const { img } = this.props.navigation.state.params;
 
-    let filteredStatus = this.filterText(status);
+    let filteredStatus = this.filterText(text);
 
     return (
 
       <ScrollView>
-        <Image
-          style={{width: 150, height: 50}}
-          source={{uri: img}}
-        />
+        {
+          // <Image
+          //   style={{width: 150, height: 50}}
+          //   source={{uri: img}}
+          // />
+        }
         <Button
           onPress={this.handlePress}
-          title="Tap to Set Notifications"
-          color="#841584"
+          title='Tap to Set Notifications'
         />
-        <Text style={{fontSize: 25, textAlign: 'center', fontWeight: 'bold'}}>Train: {train}</Text>
-        <Text style={{fontSize: 15, padding: 10}}>{filteredStatus}</Text>
+        <Text style={{
+          padding: 5,
+          fontSize: 25,
+          textAlign: 'center',
+          fontWeight: 'bold',
+          color: 'grey'
+        }}>Train: {this.spreadTitle(train[0])}</Text>
+        <Text style={{
+          padding: 5,
+          fontSize: 15,
+          textAlign: 'center',
+          fontWeight: 'bold'
+        }}>
+          <Text style={this.statusStyle(status)}>{status}</Text>
+        </Text>
+        <Text style={{ fontSize: 15, padding: 10 }}>{filteredStatus}</Text>
       </ScrollView>
     )
   }
