@@ -133,18 +133,18 @@ function filter(text) {
 
   result = result.replace(/\s\s+/g, ' '); // filter out more than 2 spaces
 
-  result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ')
+  result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ');
   // result[0] += 'PM';
 
-  if (result.includes('[ad]')) {
-    let strEnd = result.indexOf('[ad]');
-    result = result.slice(0, strEnd)
-  }
+  // if (result.includes('[ad]')) {
+  //   let strEnd = result.indexOf('[ad]');
+  //   result = result.slice(0, strEnd)
+  // }
 
-  if (result.includes('Travel Alternatives')) {
-    let strEnd = result.indexOf('Travel Alternatives');
-    result = result.slice(0, strEnd)
-  }
+  // if (result.includes('Travel Alternatives')) {
+  //   let strEnd = result.indexOf('Travel Alternatives');
+  //   result = result.slice(0, strEnd)
+  // }
   //slices off adds or alternatives
 
   result = result.trim();
