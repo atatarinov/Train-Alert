@@ -51,17 +51,32 @@ export default class StatusView extends Component {
   }
 
   separateText(text) {
-    text = text.split('Planned Work').slice(1);
-    return text.map(section => {
-      return section.trim();
-    }).map(section => {
-      section = this.filterOutTravelNotes(section);
-      section = this.filterOutServiceMap(section);
-      section = this.filterOutTravelAlternatives(section);
-      section = this.filterOutShowShuttleBusStops(section);
-      section = this.filterOutAd(section);
-      return `Planned Work: ${section} \n\n`;
-    }).join('');
+
+    if (text.includes('Planned Work')) {
+      text = text.split('Planned Work').slice(1);
+      return text.map(section => {
+        return section.trim();
+      }).map(section => {
+        section = this.filterOutTravelNotes(section);
+        section = this.filterOutServiceMap(section);
+        section = this.filterOutTravelAlternatives(section);
+        section = this.filterOutShowShuttleBusStops(section);
+        section = this.filterOutAd(section);
+        return `Planned Work: ${section} \n\n`;
+      }).join('');
+    } else {
+      text = text.split('Planned Work');
+      return text.map(section => {
+        return section.trim();
+      }).map(section => {
+        section = this.filterOutTravelNotes(section);
+        section = this.filterOutServiceMap(section);
+        section = this.filterOutTravelAlternatives(section);
+        section = this.filterOutShowShuttleBusStops(section);
+        section = this.filterOutAd(section);
+        return `${section} \n\n`;
+      }).join('');
+    }
   }
 
   filterText(text) {
@@ -69,14 +84,13 @@ export default class StatusView extends Component {
     result = result.replace(/\r?\n|\r/g, " ") // filter out new lines
     result = result.replace(/\s\s+/g, ' '); // filter out more than 2 spaces
     result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ').trim();
-
+    console.log('inside filered text*****', result)
     return this.separateText(result);
   }
 
-  handlePress() {
-    // console.log('PRESSED!!');
-
-  }
+  // handlePress() {
+  //   // console.log('PRESSED!!');
+  // }
 
   statusStyle(status) {
     if (status === 'GOOD SERVICE') {
@@ -105,6 +119,8 @@ export default class StatusView extends Component {
     const text = this.props.navigation.state.params.text[0];
     // const { img } = this.props.navigation.state.params;
     let filteredStatus = this.filterText(text);
+
+    console.log(filteredStatus)
 
     return (
 
