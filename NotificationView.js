@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 
 
 
-
 export default class NotificationView extends Component {
 
   constructor(props) {
@@ -13,7 +12,6 @@ export default class NotificationView extends Component {
       date: new Date()
     };
   }
-
 
   render() {
 
@@ -30,12 +28,12 @@ export default class NotificationView extends Component {
           confirmBtnText="Confirm"
           onDateChange={(date) => { this.setState({ date: date }) }}
         />
-        <View style={{margin: 20}}></View>
+        <View style={{margin: 15}}></View>
         <Button
-          title='Confirm'
-          color='white'
-          backgroundColor='#B0C4DE'
-          onPress={()=> console.log('Date set!')}
+          title="Confirm"
+          color="white"
+          backgroundColor="#B0C4DE"
+          onPress={() => console.log('Date set!')}
         />
       </View>
     );
