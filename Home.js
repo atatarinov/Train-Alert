@@ -12,7 +12,8 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subwayLines: []
+      subwayLines: [],
+      timestamp: []
     };
 
   }
@@ -30,7 +31,10 @@ export default class Home extends Component {
           subLines = result;
         });
         let lines = subLines.service.subway[0].line;
-        this.setState({ subwayLines: lines });
+        let timestamp = subLines.service.timestamp;
+        // timestamp = timestamp.slice(10);
+        this.setState({ subwayLines: lines, timestamp: timestamp });
+        // console.log('*****from FETCH', timestamp)
       })
       .catch((err) => {
         console.log('fetch', err);
@@ -132,9 +136,11 @@ export default class Home extends Component {
 
     const { navigate } = this.props.navigation;
     const { subwayLines } = this.state;
-    // console.log(subwayLines)
+    const timestamp = this.state.timestamp[0];
+    // timeStamp = timestamp.slice(10);
     return (
       <View>
+        <Text style={{textAlign: 'right', margin: 5}}>{timestamp}</Text>
         {
           // <Header
           //   leftComponent={{ icon: 'train', color: '#fff' }}

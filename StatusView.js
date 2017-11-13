@@ -84,7 +84,7 @@ export default class StatusView extends Component {
     result = result.replace(/\r?\n|\r/g, " ") // filter out new lines
     result = result.replace(/\s\s+/g, ' '); // filter out more than 2 spaces
     result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ').trim();
-    console.log('inside filered text*****', result)
+    // console.log('inside filered text*****', result)
     return this.separateText(result);
   }
 
@@ -120,7 +120,7 @@ export default class StatusView extends Component {
     // const { img } = this.props.navigation.state.params;
     let filteredStatus = this.filterText(text);
 
-    console.log(filteredStatus)
+    // console.log(filteredStatus)
 
     return (
 
