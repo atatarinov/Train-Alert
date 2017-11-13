@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Header, List, ListItem } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+// import { StackNavigator } from 'react-navigation';
 import HTMLView from 'react-native-htmlview';
-
-// const mta = require('mta')();
-const parseString = require('react-native-xml2js').parseString;
-
 import StatusView from './StatusView';
-
-const list = [
-  {
-    title: '1 2 3',
-    icon: 'train',
-    status: 'Good Service',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/NYCS-line-trans-Bway7th.svg/1200px-NYCS-line-trans-Bway7th.svg.png'
-  }
-];
+const parseString = require('react-native-xml2js').parseString;
 
 
 export default class Home extends Component {
@@ -30,7 +18,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    console.log('component mounted');
+    // console.log('component mounted');
     let subLines = '';
 
     fetch('http://web.mta.info/status/serviceStatus.txt')
@@ -58,17 +46,16 @@ export default class Home extends Component {
   statusStyle(status) {
     if (status === 'GOOD SERVICE') {
       return {
-        color: 'green'
+        color: 'green',
+        fontWeight: 'bold'
       }
-    } else if (status === 'PLANNED WORK' || 'SERVICE CHANGED') {
+    } else if (status === 'DELAYS') {
       return {
-        color: '#FF8C00'
-      }
-    } else if (status === 'DELAYED') {
-      return {
-        color: 'red'
+        color: 'red',
+        fontWeight: 'bold'
       }
     }
+    else return { color: '#FF8C00' }
   }
 
   disablePress(status) {
@@ -82,12 +69,70 @@ export default class Home extends Component {
     return title.split('').join(' ');
   }
 
+  setIcon(trainKind) {
+    if (trainKind === '123') {
+      return {
+        name: 'train',
+        color: 'red'
+      }
+    } else if (trainKind === '456') {
+      return {
+        name: 'train',
+        color: 'green'
+      }
+    } if (trainKind === '7') {
+      return {
+        name: 'train',
+        color: 'purple'
+      }
+    } else if (trainKind === 'ACE') {
+      return {
+        name: 'train',
+        color: 'blue'
+      }
+    } else if (trainKind === 'BDFM') {
+      return {
+        name: 'train',
+        color: '#FF7F50'
+      }
+    } else if (trainKind === 'G') {
+      return {
+        name: 'train',
+        color: '#7FFF00'
+      }
+    } else if (trainKind === 'JZ') {
+      return {
+        name: 'train',
+        color: '#D2691E'
+      }
+    } else if (trainKind === 'L') {
+      return {
+        name: 'train',
+        color: '#808080'
+      }
+    } else if (trainKind === 'NQR') {
+      return {
+        name: 'train',
+        color: '#DAA520'
+      }
+    } else if (trainKind === 'S') {
+      return {
+        name: 'train',
+        color: '#808080'
+      }
+    } else if (trainKind === 'SIR') {
+      return {
+        name: 'train',
+        color: '#0000CD'
+      }
+    }
+  }
 
   render() {
 
     const { navigate } = this.props.navigation;
     const { subwayLines } = this.state;
-    // console.log(subwayLines[0])
+    // console.log(subwayLines)
     return (
       <View>
         {
@@ -103,12 +148,13 @@ export default class Home extends Component {
               <ListItem
                 style={{ backgroundColor: 'red' }}
                 key={i}
-                leftIcon={{ name: 'train' }}
+                leftIcon={this.setIcon(item.name[0])}
                 title={this.spreadTitle(item.name[0])}
+                titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
                 rightTitle={item.status[0]}
                 rightTitleStyle={this.statusStyle(item.status[0])}
-                disabled={this.disablePress(item.status[0])}
-                onPress={(i) =>
+                // disabled={this.disablePress(item.status[0])}
+                onPress={() =>
                   navigate('StatusView', {
                     train: item.name,
                     status: item.status,
@@ -120,17 +166,6 @@ export default class Home extends Component {
             ))
           }
         </List>
-
-        {
-          // <View>
-          //   <FlatList
-          //     data={listRows}
-          //     renderItem={({ item }) => <Text style={styles.row}>{item.text}</Text>}
-          //     keyExtractor={extractKey}
-          //   />
-          // </View>
-        }
-
       </View>
     );
   }

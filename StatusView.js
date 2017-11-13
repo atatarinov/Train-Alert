@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button } from 'react-native';
-import HTMLView from 'react-native-htmlview';
+import { StyleSheet, Text, View, Image, ScrollView, DatePickerIOS } from 'react-native';
+import { Button } from 'react-native-elements';
+import NotificationView from './NotificationView';
 
 
 export default class StatusView extends Component {
@@ -73,23 +74,22 @@ export default class StatusView extends Component {
   }
 
   handlePress() {
-    console.log('Pressed!!!!')
+    // console.log('PRESSED!!');
+
   }
 
   statusStyle(status) {
     if (status === 'GOOD SERVICE') {
       return {
-        color: 'green'
+        color: 'green',
+        fontWeight: 'bold'
       }
-    } else if (status === 'PLANNED WORK' || 'SERVICE CHANGED') {
-      return {
-        color: '#FF8C00'
-      }
-    } else if (status === 'DELAYED') {
+    } else if (status === 'DELAYS') {
       return {
         color: 'red'
       }
     }
+    else return { color: '#FF8C00' }
   }
 
   spreadTitle(title) {
@@ -99,12 +99,11 @@ export default class StatusView extends Component {
   }
 
   render() {
-
+    const { navigate } = this.props.navigation;
     const { train } = this.props.navigation.state.params;
     const status = this.props.navigation.state.params.status[0];
     const text = this.props.navigation.state.params.text[0];
     // const { img } = this.props.navigation.state.params;
-
     let filteredStatus = this.filterText(text);
 
     return (
@@ -115,10 +114,14 @@ export default class StatusView extends Component {
           //   style={{width: 150, height: 50}}
           //   source={{uri: img}}
           // />
+
         }
+        <View style={{ margin: 3 }} />
         <Button
-          onPress={this.handlePress}
+          onPress={() => navigate('NotificationView', {})}
           title='Tap to Set Notifications'
+          color='white'
+          backgroundColor='#B0C4DE'
         />
         <Text style={{
           padding: 5,
@@ -129,19 +132,21 @@ export default class StatusView extends Component {
         }}>Train: {this.spreadTitle(train[0])}</Text>
         <Text style={{
           padding: 5,
-          fontSize: 15,
+          fontSize: 16,
           textAlign: 'center',
           fontWeight: 'bold'
         }}>
           <Text style={this.statusStyle(status)}>{status}</Text>
         </Text>
-        <Text style={{ fontSize: 15, padding: 10 }}>{filteredStatus}</Text>
+        <Text style={{
+          fontSize: 15,
+          padding: 10
+        }}>{filteredStatus}
+        </Text>
       </ScrollView>
     )
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
