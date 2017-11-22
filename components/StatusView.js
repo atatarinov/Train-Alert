@@ -88,10 +88,6 @@ export default class StatusView extends Component {
     return this.separateText(result);
   }
 
-  // handlePress() {
-  //   // console.log('PRESSED!!');
-  // }
-
   statusStyle(status) {
     if (status === 'GOOD SERVICE') {
       return {
@@ -120,18 +116,9 @@ export default class StatusView extends Component {
     // const { img } = this.props.navigation.state.params;
     let filteredStatus = this.filterText(text);
 
-    // console.log(filteredStatus)
-
     return (
 
       <ScrollView>
-        {
-          // <Image
-          //   style={{width: 150, height: 50}}
-          //   source={{uri: img}}
-          // />
-
-        }
         <View style={{ margin: 3 }} />
         <Button
           onPress={() => navigate('NotificationView', {})}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import { StyleSheet, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -12,20 +12,18 @@ const Views = StackNavigator({
   NotificationView: { screen: NotificationView }
 });
 
-export default class App extends Component {
+export default function App() {
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Views />
-      </View>
-    )
-  }
+  return (
+    <View style={styles.container}>
+      <Views />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 

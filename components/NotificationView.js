@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, DatePickerIOS } from 'react-native';
+import { Text, View, DatePickerIOS } from 'react-native';
 import { Button } from 'react-native-elements';
-
-
 
 export default class NotificationView extends Component {
 
@@ -26,9 +24,9 @@ export default class NotificationView extends Component {
           maxDate="2016-06-01"
           minuteInterval={1}
           confirmBtnText="Confirm"
-          onDateChange={(date) => { this.setState({ date: date }) }}
+          onDateChange={(date) => { this.setState({ date: date }); }}
         />
-        <View style={{margin: 15}}></View>
+        <View style={{ margin: 15 }} />
         <Button
           title="Confirm"
           color="white"
@@ -38,7 +36,4 @@ export default class NotificationView extends Component {
       </View>
     );
   }
-
-
-
 }

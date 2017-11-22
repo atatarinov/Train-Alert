@@ -6,7 +6,6 @@ import HTMLView from 'react-native-htmlview';
 import StatusView from './StatusView';
 const parseString = require('react-native-xml2js').parseString;
 
-
 export default class Home extends Component {
 
   constructor(props) {
@@ -15,7 +14,6 @@ export default class Home extends Component {
       subwayLines: [],
       timestamp: []
     };
-
   }
 
   componentDidMount() {
@@ -137,17 +135,10 @@ export default class Home extends Component {
     const { navigate } = this.props.navigation;
     const { subwayLines } = this.state;
     const timestamp = this.state.timestamp[0];
-    // timeStamp = timestamp.slice(10);
+
     return (
       <View>
         <Text style={{textAlign: 'right', margin: 5}}>{timestamp}</Text>
-        {
-          // <Header
-          //   leftComponent={{ icon: 'train', color: '#fff' }}
-          //   centerComponent={{ text: 'Train Alert', style: { color: '#fff', fontSize: 25, fontWeight: 'bold' } }}
-          //   rightComponent={{ icon: 'refresh', color: '#fff' }}
-          // />
-        }
         <List>
           {
             subwayLines.map((item, i) => (
