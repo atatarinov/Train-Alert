@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Header, List, ListItem } from 'react-native-elements';
-// import { StackNavigator } from 'react-navigation';
 import HTMLView from 'react-native-htmlview';
 import StatusView from './StatusView';
 const parseString = require('react-native-xml2js').parseString;
@@ -17,7 +16,6 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    // console.log('component mounted');
     let subLines = '';
 
     fetch('http://web.mta.info/status/serviceStatus.txt')
@@ -25,14 +23,11 @@ export default class Home extends Component {
       .then(response => {
         parseString(response, function (err, result) {
           if (err) throw err;
-          // result = JSON.stringify(result);
           subLines = result;
         });
         let lines = subLines.service.subway[0].line;
         let timestamp = subLines.service.timestamp;
-        // timestamp = timestamp.slice(10);
         this.setState({ subwayLines: lines, timestamp: timestamp });
-        // console.log('*****from FETCH', timestamp)
       })
       .catch((err) => {
         console.log('fetch', err);
@@ -138,7 +133,7 @@ export default class Home extends Component {
 
     return (
       <View>
-        <Text style={{textAlign: 'right', margin: 5}}>{timestamp}</Text>
+        <Text style={{ textAlign: 'right', margin: 5 }}>{timestamp}</Text>
         <List>
           {
             subwayLines.map((item, i) => (

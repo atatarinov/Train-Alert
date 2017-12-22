@@ -1,3 +1,8 @@
+/*
+	THIS FILE IS A COLLECTION OF STATUSES TO TUNE IN PARSING FILTER FUNCTIONS.
+	NOT IN USE IN THE ACTUAL APP
+*/
+
 {
 	"service": {
 		"responsecode": "0",

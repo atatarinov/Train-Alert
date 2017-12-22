@@ -12,7 +12,6 @@ export default class NotificationView extends Component {
   }
 
   render() {
-
     return (
       <View style={{ margin: 50 }}>
         <Text style={{ textAlign: 'center', fontSize: 16 }}>Set Your Notification Time</Text>

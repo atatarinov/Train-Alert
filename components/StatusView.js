@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, ScrollView, DatePickerIOS } from 'react-
 import { Button } from 'react-native-elements';
 import NotificationView from './NotificationView';
 
-
 export default class StatusView extends Component {
 
   static navigationOptions = {
@@ -84,7 +83,6 @@ export default class StatusView extends Component {
     result = result.replace(/\r?\n|\r/g, " ") // filter out new lines
     result = result.replace(/\s\s+/g, ' '); // filter out more than 2 spaces
     result = result.replace(/&nbsp;/g, ' ').replace(/&bull/g, '').replace(/\s\s+/g, ' ').trim();
-    // console.log('inside filered text*****', result)
     return this.separateText(result);
   }
 
@@ -113,11 +111,9 @@ export default class StatusView extends Component {
     const { train } = this.props.navigation.state.params;
     const status = this.props.navigation.state.params.status[0];
     const text = this.props.navigation.state.params.text[0];
-    // const { img } = this.props.navigation.state.params;
     let filteredStatus = this.filterText(text);
 
     return (
-
       <ScrollView>
         <View style={{ margin: 3 }} />
         <Button
