@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Header, List, ListItem } from 'react-native-elements';
 import HTMLView from 'react-native-htmlview';
-import StatusView from './StatusView';
 const parseString = require('react-native-xml2js').parseString;
+
+import StatusView from './StatusView';
 
 export default class Home extends Component {
 
