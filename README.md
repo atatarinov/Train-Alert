@@ -8,9 +8,10 @@ Designed to track and display the current MTA train status
 
 ![Alt text](/img/train-alert-small.png?raw=true "Main")
 
+Video presentation: (https://www.youtube.com/watch?v=xfQUf4c1-Yw)
 
 
 Future improvements:
   - Add scheduled notifications
   - Style the single status view
-  - Improve filter of the status
+  - Improve filter of statuses
