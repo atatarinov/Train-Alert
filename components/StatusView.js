@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, DatePickerIOS } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-import NotificationView from './NotificationView';
 
 export default class StatusView extends Component {
 

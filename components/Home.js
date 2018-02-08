@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
-import { Header, List, ListItem } from 'react-native-elements';
-import HTMLView from 'react-native-htmlview';
+import { StyleSheet, Text, View } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 const parseString = require('react-native-xml2js').parseString;
-
-import StatusView from './StatusView';
 
 export default class Home extends Component {
 
@@ -146,13 +143,11 @@ export default class Home extends Component {
                 titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
                 rightTitle={item.status[0]}
                 rightTitleStyle={this.statusStyle(item.status[0])}
-                // disabled={this.disablePress(item.status[0])}
                 onPress={() =>
                   navigate('StatusView', {
                     train: item.name,
                     status: item.status,
                     text: item.text,
-                    // img: item.img
                   })
                 }
               />

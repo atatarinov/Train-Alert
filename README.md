@@ -6,6 +6,12 @@ Below you'll find information about performing common tasks. The most recent ver
 
 Designed to track and display the current MTA train status
 
+![alt text](http://url/to/img.png)
+
+![Alt text](/img/train-alert.png?raw=true "Main")
+
+
+
 Future improvements:
   - Add scheduled notifications
   - Style the single status view
